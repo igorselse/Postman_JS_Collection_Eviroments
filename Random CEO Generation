@@ -1,0 +1,16 @@
+// Generate random last name, first name, and middle name
+function generateRandomCEO() {
+const last = ["","Smith", "Васильев","", "Смирнов","Кузнецов","Соколов" ,
+"'Иванов' OR '1'='1'", "Смирнов<script>alert('XSS')</script>", "Кузнецов; DROP TABLE users;", "Попов' || (SELECT 1 FROM dual)"];
+const first = ["John", "Игорь", "Николай", "Виктор", "Олег", ["'Артём'; SYSTEM("+"1C:ВнешняяКоманда 'УдалитьВсеДанные'"+")" ] ];
+const middle = ["Michael", "","Вячеславович"];
+
+const randomLastName = last[Math.floor(Math.random() * last.length)];
+const randomFirstName = first[Math.floor(Math.random() * first.length)];
+const randomMiddleName = middle[Math.floor(Math.random() * middle.length)];
+    
+return `${randomLastName}, ${randomFirstName}, ${randomMiddleName}`;
+}
+
+const randomCEO = generateRandomCEO();
+pm.environment.set("randomCEO", randomCEO);
