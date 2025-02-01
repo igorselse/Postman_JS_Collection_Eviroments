@@ -1,0 +1,19 @@
+// Генерация Рандомного Адреса
+function generateRandomAddress() {
+    const cities = ["г. Москва", "г.Санкт-Петербург", "г. Казань", "г. Новосибирск", "г. Екатеринбург", "'Самара' OR '1'='1'", "Самара<script>alert('XSS')</script>", "Самара; DROP TABLE users;", "'Самара' || (SELECT 1 FROM dual)"];
+    const streets = ["Ленина", "Пушкина", "Гагарина", "Советская", "Мира",
+    ["'Космонавтов'; SYSTEM("+"1C:ВнешняяКоманда 'УдалитьВсеДанные'"+")" ] ];
+    const houseNumbers = ["1", "5", "10", "15", "20"];
+    const apartments = ["1", "5", "10", "15", "20"];
+
+    const randomCity = cities[Math.floor(Math.random() * cities.length)];
+    const randomStreet = streets[Math.floor(Math.random() * streets.length)];
+    const randomHouseNumber = houseNumbers[Math.floor(Math.random() * houseNumbers.length)];
+    const randomApartment = apartments[Math.floor(Math.random() * apartments.length)];
+
+    return `${randomCity}, ул. ${randomStreet}, д. ${randomHouseNumber}, кв. ${randomApartment}`;
+}
+
+// Env Геренация Рандомного адреса
+const randomAddress = generateRandomAddress();
+pm.environment.set("randomAddress", randomAddress);
