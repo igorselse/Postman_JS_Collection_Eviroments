@@ -1,16 +1,23 @@
-// Generate random last name, first name, and middle name
-function generateRandomCEO() {
-const last = ["","Smith", "Васильев","", "Смирнов","Кузнецов","Соколов" ,
-"'Иванов' OR '1'='1'", "Смирнов<script>alert('XSS')</script>", "Кузнецов; DROP TABLE users;", "Попов' || (SELECT 1 FROM dual)"];
-const first = ["John", "Игорь", "Николай", "Виктор", "Олег", ["'Артём'; SYSTEM("+"1C:ВнешняяКоманда 'УдалитьВсеДанные'"+")" ] ];
-const middle = ["Michael", "","Вячеславович"];
-
-const randomLastName = last[Math.floor(Math.random() * last.length)];
-const randomFirstName = first[Math.floor(Math.random() * first.length)];
-const randomMiddleName = middle[Math.floor(Math.random() * middle.length)];
-    
-return `${randomLastName}, ${randomFirstName}, ${randomMiddleName}`;
+// Вспомогательная функция для выбора случайного элемента массива
+function randomElement(array) {
+    return array[Math.floor(Math.random() * array.length)];
 }
 
-const randomCEO = generateRandomCEO();
-pm.environment.set("randomCEO", randomCEO);
+// Генерация случайного ФИО (с инъекциями)
+function generateRandomCEO() {
+    const lastNames = [
+        "Smith", "Васильев", "Смирнов", "Кузнецов", "Соколов",
+        "'Иванов' OR '1'='1'", "Смирнов<script>alert('XSS')</script>", 
+        "Кузнецов; DROP TABLE users;", "Попов' || (SELECT 1 FROM dual)"
+    ];
+    const firstNames = [
+        "John", "Игорь", "Николай", "Виктор", "Олег",
+        "'Артём'; SYSTEM('1C:ВнешняяКоманда УдалитьВсеДанные')"
+    ];
+    const middleNames = ["Michael", "Вячеславович", ""];
+
+    return `${randomElement(lastNames)} ${randomElement(firstNames)} ${randomElement(middleNames)}`.trim();
+}
+
+// Установка переменной окружения в Postman
+pm.environment.set("randomCEO", generateRandomCEO());
