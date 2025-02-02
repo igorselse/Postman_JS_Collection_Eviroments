@@ -1,0 +1,10 @@
+// Генерация случайного ИНН (с инъекциями)
+function generateRandomINN() {
+    const innValues = [
+        "1234567890", "1234", "qwe", "йцу", "'123' OR '1'='1'", "ИНН; DROP TABLE users;", "ИНН<script>alert('XSS')</script>"
+    ];
+    return randomElement(innValues);
+}
+
+// Установка переменной окружения в Postman
+pm.environment.set("randomINN", generateRandomINN());
