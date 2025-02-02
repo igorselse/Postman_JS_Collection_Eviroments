@@ -1,3 +1,8 @@
+// Вспомогательная функция для выбора случайного элемента массива
+function randomElement(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
 // Генерация случайного ИНН (с инъекциями)
 function generateRandomINN() {
     const innValues = [
