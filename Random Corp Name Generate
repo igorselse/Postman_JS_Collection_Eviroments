@@ -1,0 +1,18 @@
+// Вспомогательная функция для выбора случайного элемента массива
+function randomElement(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
+// Генерация случайного названия компании (с инъекциями)
+function generateRandomCorpName() {
+    const corpNames = [
+        "qweqwe", "QWEQWE", "йцуйцу", "ЙЦУЙЦУ", "123123", "123,ЙЦУ", 
+        "qwe QWE", "qwe-QWE", "'QWE'; SYSTEM('1C:ВнешняяКоманда УдалитьВсеДанные')", 
+        "QWEqwe<script>alert('XSS')</script>", "'Иванов' OR '1'='1'", 
+        "QWE; DROP TABLE users;", "QWE' || (SELECT 1 FROM dual)"
+    ];
+    return randomElement(corpNames);
+}
+
+// Установка переменной окружения в Postman
+pm.environment.set("randomCorpName", generateRandomCorpName());
